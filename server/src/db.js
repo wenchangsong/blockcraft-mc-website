@@ -1,17 +1,19 @@
 import Database from 'better-sqlite3'
-import { fileURLToPath } from 'url'
-import { dirname, join } from 'path'
-import { mkdirSync, existsSync } from 'fs'
+import { join } from 'path'
+import { mkdirSync, existsSync, accessSync, constants } from 'fs'
+import { STORAGE_DIR } from './config.js'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const dataDir = join(__dirname, '..', '..', 'data')
-if (!existsSync(dataDir)) {
-  mkdirSync(dataDir, { recursive: true })
+if (!existsSync(STORAGE_DIR)) {
+  mkdirSync(STORAGE_DIR, { recursive: true })
+} else {
+  // Verify writable — handles volume mount edge case
+  try { accessSync(STORAGE_DIR, constants.W_OK) } catch {
+    // Retry mkdir to fix permissions on fresh volume
+    mkdirSync(STORAGE_DIR, { recursive: true })
+  }
 }
 
-const db = new Database(join(dataDir, 'minecraft.db'))
+const db = new Database(join(STORAGE_DIR, 'minecraft.db'))
 
 db.pragma('journal_mode = WAL')
 db.pragma('foreign_keys = ON')

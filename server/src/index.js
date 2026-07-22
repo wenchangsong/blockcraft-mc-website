@@ -11,7 +11,7 @@ import newsRoutes from './routes/news.js'
 import forumRoutes from './routes/forum.js'
 import uploadRoutes from './routes/upload.js'
 import seed from './seed.js'
-import { FRONTEND_ORIGIN, PORT } from './config.js'
+import { FRONTEND_ORIGIN, PORT, STORAGE_DIR } from './config.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -40,7 +40,7 @@ if (!isProduction) {
 }
 
 app.use(express.json({ limit: '1mb' }))
-app.use('/uploads', express.static(join(__dirname, '..', '..', 'data', 'uploads')))
+app.use('/uploads', express.static(join(STORAGE_DIR, 'uploads')))
 
 // Global rate limiter
 const globalLimiter = rateLimit({

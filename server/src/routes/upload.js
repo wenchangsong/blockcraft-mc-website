@@ -3,13 +3,9 @@ import multer from 'multer'
 import { extname, join } from 'path'
 import { mkdirSync, existsSync } from 'fs'
 import { authenticate } from '../middleware/auth.js'
-import { fileURLToPath } from 'url'
-import { dirname } from 'path'
+import { STORAGE_DIR } from '../config.js'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const uploadsDir = join(__dirname, '..', '..', '..', 'data', 'uploads')
+const uploadsDir = join(STORAGE_DIR, 'uploads')
 if (!existsSync(uploadsDir)) {
   mkdirSync(uploadsDir, { recursive: true })
 }
