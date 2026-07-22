@@ -9,7 +9,7 @@ import { dirname } from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const uploadsDir = join(__dirname, '..', '..', 'uploads')
+const uploadsDir = join(__dirname, '..', '..', '..', 'data', 'uploads')
 if (!existsSync(uploadsDir)) {
   mkdirSync(uploadsDir, { recursive: true })
 }

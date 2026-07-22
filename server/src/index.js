@@ -40,7 +40,7 @@ if (!isProduction) {
 }
 
 app.use(express.json({ limit: '1mb' }))
-app.use('/uploads', express.static(join(__dirname, '..', 'uploads')))
+app.use('/uploads', express.static(join(__dirname, '..', '..', 'data', 'uploads')))
 
 // Global rate limiter
 const globalLimiter = rateLimit({
