@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "concurrently -n server,client -c green,cyan \"cd server && node --watch src/index.js\" \"vite\"",
     "build": "vite build",
-    "start": "npm run build && cd server && cross-env NODE_ENV=production node src/index.js",
+    "start": "node server/src/index.js",
+    "build:prod": "vite build",
+    "postinstall": "cd server && npm install",
     "preview": "vite preview"
   },
   "dependencies": {
