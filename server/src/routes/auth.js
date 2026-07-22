@@ -107,6 +107,27 @@ router.post('/login', (req, res) => {
   })
 })
 
+router.put('/password', authenticate, (req, res) => {
+  const { currentPassword, newPassword } = req.body
+
+  if (!currentPassword || !newPassword) {
+    return res.status(400).json({ error: 'Current password and new password are required' })
+  }
+  if (newPassword.length < 6) {
+    return res.status(400).json({ error: 'New password must be at least 6 characters' })
+  }
+
+  const user = db.prepare('SELECT * FROM users WHERE id = ?').get(req.user.id)
+  if (!bcrypt.compareSync(currentPassword, user.password_hash)) {
+    return res.status(400).json({ error: 'Current password is incorrect' })
+  }
+
+  const hash = bcrypt.hashSync(newPassword, 10)
+  db.prepare('UPDATE users SET password_hash = ? WHERE id = ?').run(hash, req.user.id)
+
+  res.json({ message: 'Password changed successfully' })
+})
+
 router.get('/me', authenticate, (req, res) => {
   const user = db.prepare('SELECT id, username, email, role, created_at FROM users WHERE id = ?').get(req.user.id)
   if (!user) {

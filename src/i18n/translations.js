@@ -162,6 +162,11 @@ const translations = {
     'profile.role': 'Role',
     'profile.role.admin': 'Admin',
     'profile.role.player': 'Player',
+    'profile.changePassword': 'Change Password',
+    'profile.currentPassword': 'Current Password',
+    'profile.newPassword': 'New Password',
+    'profile.passwordChanged': 'Password changed successfully!',
+    'profile.passwordError': 'Failed to change password',
 
     // 404
     'notFound.title': '404 — Chunk Not Found',
@@ -343,6 +348,11 @@ const translations = {
     'profile.role': '角色',
     'profile.role.admin': '管理员',
     'profile.role.player': '玩家',
+    'profile.changePassword': '修改密码',
+    'profile.currentPassword': '当前密码',
+    'profile.newPassword': '新密码',
+    'profile.passwordChanged': '密码修改成功！',
+    'profile.passwordError': '密码修改失败',
 
     // 404
     'notFound.title': '404 — 区块未找到',
