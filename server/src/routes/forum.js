@@ -155,7 +155,7 @@ router.get('/topics/:id/posts', (req, res) => {
 
   const total = db.prepare('SELECT COUNT(*) as count FROM forum_posts WHERE topic_id = ?').get(req.params.id).count
   const posts = db.prepare(`
-    SELECT p.*, u.username as author_username, u.role as author_role
+    SELECT p.*, u.username as author_username, u.role as author_role, u.avatar_url as author_avatar_url
     FROM forum_posts p
     JOIN users u ON p.author_id = u.id
     WHERE p.topic_id = ?
@@ -188,7 +188,7 @@ router.post('/topics/:id/posts', authenticate, (req, res) => {
   db.prepare("UPDATE forum_topics SET updated_at = datetime('now') WHERE id = ?").run(req.params.id)
 
   const post = db.prepare(`
-    SELECT p.*, u.username as author_username, u.role as author_role
+    SELECT p.*, u.username as author_username, u.role as author_role, u.avatar_url as author_avatar_url
     FROM forum_posts p JOIN users u ON p.author_id = u.id
     WHERE p.id = ?
   `).get(result.lastInsertRowid)
@@ -213,7 +213,7 @@ router.put('/posts/:id', authenticate, (req, res) => {
   db.prepare("UPDATE forum_posts SET content = ?, updated_at = datetime('now') WHERE id = ?").run(content, req.params.id)
 
   const updated = db.prepare(`
-    SELECT p.*, u.username as author_username, u.role as author_role
+    SELECT p.*, u.username as author_username, u.role as author_role, u.avatar_url as author_avatar_url
     FROM forum_posts p JOIN users u ON p.author_id = u.id
     WHERE p.id = ?
   `).get(req.params.id)

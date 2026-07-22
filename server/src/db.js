@@ -80,8 +80,9 @@ db.exec(`
   );
 `)
 
-// Migration: add image_url if missing from older DBs
+// Migration: add columns if missing from older DBs
 try { db.exec('ALTER TABLE news ADD COLUMN image_url TEXT'); } catch {}
 try { db.exec('ALTER TABLE forum_posts ADD COLUMN image_url TEXT'); } catch {}
+try { db.exec('ALTER TABLE users ADD COLUMN avatar_url TEXT'); } catch {}
 
 export default db

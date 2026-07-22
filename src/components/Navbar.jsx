@@ -34,9 +34,17 @@ export default function Navbar() {
           </button>
           {isAuthenticated ? (
             <>
-              <Link to="/profile" style={{ fontSize: '0.75rem', color: 'var(--mc-grass)' }}>
-                {user.username}
-                {isAdmin && <span className="admin-badge">ADMIN</span>}
+              <Link to="/profile" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
+                <span className="nav-avatar" style={{
+                  backgroundImage: user.avatar_url ? `url(${user.avatar_url})` : 'none',
+                  backgroundSize: 'cover', backgroundPosition: 'center',
+                }}>
+                  {!user.avatar_url && user.username[0].toUpperCase()}
+                </span>
+                <span style={{ fontSize: '0.75rem', color: 'var(--mc-grass)' }}>
+                  {user.username}
+                  {isAdmin && <span className="admin-badge">ADMIN</span>}
+                </span>
               </Link>
               <button className="mc-btn small" onClick={handleLogout}>{t('nav.logout')}</button>
             </>

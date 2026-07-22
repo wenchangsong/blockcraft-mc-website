@@ -500,6 +500,21 @@ a:hover {
   color: var(--mc-light-gray);
 }
 
+/* ===== Nav Avatar ===== */
+.nav-avatar {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--mc-grass);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.55rem;
+  color: var(--mc-white);
+  background-color: var(--mc-grass);
+  flex-shrink: 0;
+}
+
 /* ===== Posts ===== */
 .post {
   background-color: var(--mc-dark);

@@ -128,8 +128,30 @@ router.put('/password', authenticate, (req, res) => {
   res.json({ message: 'Password changed successfully' })
 })
 
+router.put('/profile', authenticate, (req, res) => {
+  const { username, avatar_url } = req.body
+
+  if (username !== undefined) {
+    if (username.length < 3) {
+      return res.status(400).json({ error: 'Username must be at least 3 characters' })
+    }
+    const existing = db.prepare('SELECT id FROM users WHERE username = ? AND id != ?').get(username, req.user.id)
+    if (existing) {
+      return res.status(409).json({ error: 'Username already taken' })
+    }
+    db.prepare('UPDATE users SET username = ? WHERE id = ?').run(username, req.user.id)
+  }
+
+  if (avatar_url !== undefined) {
+    db.prepare('UPDATE users SET avatar_url = ? WHERE id = ?').run(avatar_url || null, req.user.id)
+  }
+
+  const user = db.prepare('SELECT id, username, email, role, avatar_url, created_at FROM users WHERE id = ?').get(req.user.id)
+  res.json({ data: user, message: 'Profile updated' })
+})
+
 router.get('/me', authenticate, (req, res) => {
-  const user = db.prepare('SELECT id, username, email, role, created_at FROM users WHERE id = ?').get(req.user.id)
+  const user = db.prepare('SELECT id, username, email, role, avatar_url, created_at FROM users WHERE id = ?').get(req.user.id)
   if (!user) {
     return res.status(404).json({ error: 'User not found' })
   }

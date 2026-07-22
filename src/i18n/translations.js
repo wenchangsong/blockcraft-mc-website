@@ -167,6 +167,11 @@ const translations = {
     'profile.newPassword': 'New Password',
     'profile.passwordChanged': 'Password changed successfully!',
     'profile.passwordError': 'Failed to change password',
+    'profile.avatar': 'Avatar',
+    'profile.updateProfile': 'Update Profile',
+    'profile.profileUpdated': 'Profile updated!',
+    'profile.profileError': 'Failed to update profile',
+    'profile.avatarUploadFailed': 'Avatar upload failed',
 
     // 404
     'notFound.title': '404 — Chunk Not Found',
@@ -353,6 +358,11 @@ const translations = {
     'profile.newPassword': '新密码',
     'profile.passwordChanged': '密码修改成功！',
     'profile.passwordError': '密码修改失败',
+    'profile.avatar': '头像',
+    'profile.updateProfile': '更新资料',
+    'profile.profileUpdated': '资料更新成功！',
+    'profile.profileError': '资料更新失败',
+    'profile.avatarUploadFailed': '头像上传失败',
 
     // 404
     'notFound.title': '404 — 区块未找到',

@@ -173,7 +173,15 @@ export default function TopicPage() {
           <div className="post-header">
             <div className="post-author">
               <span className="floor-badge">{t('floor', { num: getFloor(idx) })}</span>
-              <div className="post-avatar">{post.author_username[0].toUpperCase()}</div>
+              <div
+                className="post-avatar"
+                style={{
+                  backgroundImage: post.author_avatar_url ? `url(${post.author_avatar_url})` : 'none',
+                  backgroundSize: 'cover', backgroundPosition: 'center',
+                }}
+              >
+                {!post.author_avatar_url && post.author_username[0].toUpperCase()}
+              </div>
               <div>
                 <strong>{post.author_username}</strong>
                 {post.author_role === 'admin' && <span className="admin-badge">ADMIN</span>}

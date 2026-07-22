@@ -35,6 +35,12 @@ export function AuthProvider({ children }) {
     return res.data.data
   }, [])
 
+  const updateProfile = useCallback(async (data) => {
+    const res = await api.put('/api/auth/profile', data)
+    setUser(res.data.data)
+    return res.data.data
+  }, [])
+
   const logout = useCallback(() => {
     localStorage.removeItem('token')
     setUser(null)
@@ -49,6 +55,7 @@ export function AuthProvider({ children }) {
       login,
       register,
       logout,
+      updateProfile,
     }}>
       {children}
     </AuthContext.Provider>
