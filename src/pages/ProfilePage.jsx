@@ -67,7 +67,7 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      <div className="mc-container mt-2" style={{ maxWidth: 500 }}>
+      <div className="mc-container profile-card mt-2">
         <h3 style={{ fontSize: '0.75rem', marginBottom: '1rem' }}>{t('profile.changePassword')}</h3>
         <ErrorMessage message={pwError} />
         {pwSuccess && <div className="success-message">{pwSuccess}</div>}
